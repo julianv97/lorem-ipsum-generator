@@ -12,7 +12,7 @@ const Form = ({ count, handleSubmit, handleChange }) => {
         id="amount"
         min="0"
         value={count}
-        className="rounded px-2 w-16 mx-4  outline-none	"
+        className="rounded px-2 w-16 mx-4 outline-none	bg-gray-200"
         onChange={(e) => handleChange(e)}
       />
       <button

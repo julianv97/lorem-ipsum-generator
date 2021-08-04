@@ -7,7 +7,7 @@ import data from "./data";
 
 function App() {
   const [text, setText] = useState([]);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState("");
 
   const handleChange = (e) => {
     setCount(e.target.value);
