@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#root{
+    background-color: rgba(143, 185, 150, var(--tw-bg-opacity));
+    height:100%
+}

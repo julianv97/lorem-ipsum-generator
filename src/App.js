@@ -1,43 +1,53 @@
 import React, { useState } from "react";
+import Title from "./components/Title";
+import Form from "./components/Form";
+import Paragraphs from "./components/Paragraphs";
+import ClearButton from "./components/ClearButton";
 import data from "./data";
 
 function App() {
   const [text, setText] = useState([]);
   const [count, setCount] = useState(0);
 
+  const handleChange = (e) => {
+    setCount(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let amount = parseInt(count);
-    setText(data.slice(0, amount));
-    /* CASOS:
-    count = 0
-    count < 0 
-    count > text.length
-    desarrollar un modal para estos casos
-    */
+
+    if (amount === 0) {
+      setText([]);
+    }
+    if ((amount > 0 && amount < data.length) || amount > data.length) {
+      setText(data.slice(0, amount));
+    }
+    if (amount < 0) {
+      setCount(0);
+      setText([]);
+    }
+    setCount(0);
+  };
+
+  const clearAll = () => {
+    setText([]);
+    setCount(0);
   };
 
   return (
-    <section className=" w-full flex flex-col items-center justify-center">
-      <h1 className="uppercase">tired of bored lorem ipsum?</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="amount">paragraphs:</label>
-        <input
-          type="number"
-          name="amount"
-          id="amount"
-          value={count}
-          onChange={(e) => setCount(e.target.value)}
-        />
-        <button type="submit" className="uppercase">
-          generate
-        </button>
-      </form>
-      <article>
-        {text.map((paragraph, index) => {
-          return <p key={index}> {paragraph} </p>;
-        })}
-      </article>
+    <section className="h-screen w-full flex flex-col items-center pt-10   bg-mint-green">
+      <Title />
+
+      <Form
+        count={count}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+      />
+
+      <Paragraphs text={text} />
+
+      {text.length > 0 && <ClearButton clearAll={clearAll} />}
     </section>
   );
 }
